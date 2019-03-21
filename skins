@@ -1,0 +1,49 @@
+<? Php
+naamruimte  Fortnite \ Model ;
+class  Items {
+    privé  $ items ;
+    / **
+     * Construeert een nieuwe Fortnite \ Model \ Items-instantie.
+     * @param- object $ items Objectobjecten
+     * /
+    publieke  functie  __construct ( $ items ) {
+        $ this -> items  =  $ this -> parseItems (( array ) $ items );
+    }
+    / **
+     * Retourneert item op zijn item-ID.
+     * @param   string $ id Item-ID
+     * @return- object Het item (null indien niet gevonden)
+     * /
+    public  function  id ( $ id ) {
+        foreach ( $ this -> items  als  $ item ) {
+            if ( $ item -> itemId  ==  $ id ) retourneert  $ item ;
+        }
+        return  null ;
+    }
+    / **
+     * Retourneert alle items die in eigendom zijn.
+     * @return array De items
+     * /
+    openbare  functie  all () {
+        return  $ this -> items ;
+    }
+    //
+    // TODO (Tustin): misschien alle items van een bepaald type krijgen? Niet echt mogelijk voor mij omdat ik niet meer dan 5 items bezit en het zijn allemaal dansen en zweefvliegtuigen.
+    // Je zou gewoon 'templateId' moeten analyseren voor het eerste deel om het type te krijgen.
+    //
+    / **
+     * Parses een lijst van items en verwijdert alle niet-items (om wat voor reden, quests verschijnen hier)
+     * @param   array $ items Items
+     * @return array Actuele items
+     * /
+    private  function  parseItems ( $ items ) {
+        $ actual  = [];
+        foreach ( $ items  als  $ key  =>  $ item ) {
+            if ( strpos ( $ item -> templateId , " Quest: " ) ! ==  false ) ga verder ;
+            $ newItem  =  $ item ;
+            $ newItem -> itemId  =  $ key ; // Voeg het itemId toe als een kvp, omdat het aanvankelijk alleen als object-ID bestaat
+            $ actual [] =  $ newItem ;
+        }
+         $ actueel teruggeven ;
+    }
+}
